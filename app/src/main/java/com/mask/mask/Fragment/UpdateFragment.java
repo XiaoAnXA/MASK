@@ -1,0 +1,49 @@
+package com.mask.mask.Fragment;
+
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.mask.mask.ViewAdapter.MainUpdateFragmentRecyclerAdapter;
+import com.mask.mask.Bean.MainUpdateFragmentRecyclerItemBean;
+import com.mask.mask.R;
+
+import java.util.ArrayList;
+
+public class UpdateFragment extends BaseFragment {
+
+    public RecyclerView mRecyclerView;
+
+
+    public MainUpdateFragmentRecyclerAdapter mMainUpdateFragmentRecyclerAdapter;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mMainUpdateFragmentRecyclerAdapter = new MainUpdateFragmentRecyclerAdapter(getArrayList(),getContext());
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view =inflater.inflate(R.layout.main_update_fragment,null);
+        mRecyclerView = view.findViewById(R.id.main_update_recycler);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.setAdapter(mMainUpdateFragmentRecyclerAdapter);
+        return view;
+    }
+
+    public ArrayList<MainUpdateFragmentRecyclerItemBean> getArrayList(){
+        ArrayList<MainUpdateFragmentRecyclerItemBean> mainUpdateFragmentRecyclerItemBeans = new ArrayList<>();
+        for (int i = 0;i < 10;i++ ){
+            mainUpdateFragmentRecyclerItemBeans.add(new MainUpdateFragmentRecyclerItemBean("可用更新2018.11.12","更新说明：本次更新针对下巴处按摩流程作科学调整，按摩时间为8分钟，重点放松下额处肌肉",
+                    "更新至模式",R.drawable.main_update_fragment_btn_update));
+        }
+        return  mainUpdateFragmentRecyclerItemBeans;
+    }
+}

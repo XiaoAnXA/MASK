@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#ffffff</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorMain">#f799aa</color>
+    <color name="colorMainDown">#8ff799aa</color>
+    <color name="colorMainText">#ffffff</color>
+    <color name="colorMainUpdateFragmentBtnUpdate">#ff9999</color>
+    <color name="colorMainUpdateFragmentBtnUpdated">#D3D2D2</color>
+
+</resources>
