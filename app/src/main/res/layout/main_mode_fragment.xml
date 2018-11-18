@@ -31,7 +31,7 @@
                 android:textSize="25sp" />
 
             <ImageView
-                android:id="@+id/main_iv_ic"
+                android:id="@+id/mode_iv_logo"
                 android:layout_width="54dp"
                 android:layout_height="32dp"
                 android:layout_alignParentEnd="true"

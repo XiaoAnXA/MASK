@@ -27,10 +27,9 @@ public class BlueToothUtils {
     public static BlueToothUtils sInstance;
     private BluetoothAdapter mBA;
     // UUID.randomUUID()随机获取UUID
-    private final UUID MY_UUID = UUID
-            .fromString("db764ac8-4b08-7f25-aafe-59d03c27bae3");
+    private final UUID MY_UUID = UUID.fromString("db764ac8-4b08-7f25-aafe-59d03c27bae3");
     // 连接对象的名称
-    private final String NAME = "LGL";
+    private final String NAME = "TH-05";
 
     // 这里本身即是服务端也是客户端，需要如下类
     private BluetoothSocket mSocket;
@@ -42,6 +41,10 @@ public class BlueToothUtils {
     //线程类的实例
     private AcceptThread ac;
 
+    /**
+     * 单例模式
+     * @return 返回该工具类
+     */
     public static synchronized BlueToothUtils getInstance() {
         if (sInstance == null) {
             sInstance = new BlueToothUtils();
@@ -72,7 +75,6 @@ public class BlueToothUtils {
 
     /**
      * 判断是否打开蓝牙
-     *
      * @return
      */
     public boolean isEnabled() {
@@ -115,7 +117,6 @@ public class BlueToothUtils {
 
     /**
      * 与设备配对
-     *
      * @param device
      */
     public void createBond(BluetoothDevice device) {
@@ -129,7 +130,6 @@ public class BlueToothUtils {
 
     /**
      * 与设备解除配对
-     *
      * @param device
      */
     public void removeBond(BluetoothDevice device) {
@@ -360,7 +360,6 @@ public class BlueToothUtils {
         public void handleMessage(Message msg) {
             showToast(String.valueOf(msg.obj));
             Log.e(TAG, "服务端:" + msg.obj);
-            super.handleMessage(msg);
         }
     };
 

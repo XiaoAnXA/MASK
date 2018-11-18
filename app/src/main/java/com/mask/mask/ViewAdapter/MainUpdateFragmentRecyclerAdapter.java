@@ -25,7 +25,6 @@ public class MainUpdateFragmentRecyclerAdapter extends RecyclerView.Adapter {
     public MainUpdateFragmentRecyclerAdapter(ArrayList<MainUpdateFragmentRecyclerItemBean> mainUpdateFragmentRecyclerItemBeans,Context context){
         mMainUpdateFragmentRecyclerItemBeans = mainUpdateFragmentRecyclerItemBeans;
         mContext =context;
-
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
@@ -40,7 +39,6 @@ public class MainUpdateFragmentRecyclerAdapter extends RecyclerView.Adapter {
             mBtnUpdate = itemView.findViewById(R.id.main_update_recycler_item_btn_update);
         }
     }
-
 
     @NonNull
     @Override
