@@ -1,10 +1,11 @@
-package com.mask.mask.BluConnection;
+package com.mask.mask.BluTools;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothSocket;
 import android.util.Log;
 
 import com.mask.mask.Event.BluStateEvent;
+import com.mask.mask.Util.DataExchangeUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -13,6 +14,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Arrays;
 
+/**
+ * 接收和发送数据操作类
+ */
 public class ConnectionManagementThread extends Thread {
 
     private final BluetoothSocket mmSocket;
@@ -39,7 +43,8 @@ public class ConnectionManagementThread extends Thread {
         while (true) {
             try {
                 bytes = mmInStream.read(buffer);
-                Log.e("接收的数据", "run: "+ Arrays.toString(buffer));
+                Log.e("接收的数据", "run:"+ DataExchangeUtil.HexToString(buffer));
+                Log.e("接收的数据", "run:"+ Arrays.toString(buffer));
             } catch (IOException e) {
                 EventBus.getDefault().post(new BluStateEvent("已断开连接", BluetoothAdapter.STATE_DISCONNECTED));
                 break;
@@ -47,11 +52,11 @@ public class ConnectionManagementThread extends Thread {
         }
     }
 
-    public void write(String date) {
+    public void write(String data) {
         try {
-            mmOutStream.write(date.getBytes());
+            mmOutStream.write(DataExchangeUtil.HexString2Bytes(data));
             mmOutStream.flush();
-            Log.e("发送的数据", "run: "+String.valueOf(date));
+            Log.e("发送的数据", "run: "+String.valueOf(data));
         } catch (IOException e) {
             EventBus.getDefault().post(new BluStateEvent("已断开连接", BluetoothAdapter.STATE_DISCONNECTED));
         }

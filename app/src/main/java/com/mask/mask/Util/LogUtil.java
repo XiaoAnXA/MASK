@@ -1,7 +1,10 @@
-package com.mask.mask;
+package com.mask.mask.Util;
 
 import android.util.Log;
 
+/**
+ * Log工具类
+ */
 public class LogUtil {
 
     public static final int VERBOSE = 1;

@@ -1,9 +1,10 @@
-package com.mask.mask.BluConnection;
+package com.mask.mask.BluTools;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 
+import com.mask.mask.BluTools.ConnectionManagementThread;
 import com.mask.mask.Event.BluStateEvent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -11,6 +12,9 @@ import org.greenrobot.eventbus.EventBus;
 import java.io.IOException;
 import java.util.UUID;
 
+/**
+ * 蓝牙连接类
+ */
 public class ConnectionThread extends Thread {
 
     public final static String MY_UUID = "00001101-0000-1000-8000-00805F9B34FB";
@@ -50,5 +54,4 @@ public class ConnectionThread extends Thread {
             EventBus.getDefault().post(new BluStateEvent("已断开连接", BluetoothAdapter.STATE_CONNECTED));
         } catch (IOException e) { }
     }
-
 }

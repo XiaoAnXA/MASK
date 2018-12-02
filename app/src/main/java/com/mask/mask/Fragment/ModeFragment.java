@@ -16,10 +16,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.mask.mask.BluConnection.ConnectionThread;
-import com.mask.mask.BluConnection.ConnectionManagementThread;
+import com.mask.mask.BluTools.ConnectionThread;
+import com.mask.mask.BluTools.ConnectionManagementThread;
 import com.mask.mask.BluTools.BlueTools;
 import com.mask.mask.Event.BluStateEvent;
+import com.mask.mask.Util.Cmd;
 import com.mask.mask.R;
 
 import org.greenrobot.eventbus.EventBus;
@@ -28,7 +29,6 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class ModeFragment extends BaseFragment implements View.OnClickListener {
 
@@ -103,33 +103,50 @@ public class ModeFragment extends BaseFragment implements View.OnClickListener {
 
     }
 
+    public void write(String data){
+        if (mConnectionManagementThread == null){return;}
+        mConnectionManagementThread.write(data);
+    }
 
     @Override
     public void onClick(View v) {
-        if (mConnectionManagementThread == null){return;}
+
         switch (v.getId()){
             case R.id.mode_btn_1:
-                mConnectionManagementThread.write("abcd");
+                write(Cmd.$Write);
                 break;
             case R.id.mode_btn_2:
+                write("$Write");
                 break;
             case R.id.mode_btn_3:
+                write("$Read");
                 break;
             case R.id.mode_btn_4:
+                write("$OK");
+                break;
+            case R.id.mode_btn_5:
+                write("$OK");
                 break;
             case R.id.mode_btn_6:
+                write("$NO");
                 break;
             case R.id.mode_btn_7:
+                write("$Not");
                 break;
             case R.id.mode_btn_8:
+                write("$Save");
                 break;
             case R.id.mode_btn_9:
+                write("$Cancel");
                 break;
             case R.id.mode_btn_10:
+                write("$Temp");
                 break;
             case R.id.mode_btn_11:
+                write("$Data");
                 break;
             case R.id.mode_btn_12:
+                write(",");
                 break;
             case R.id.mode_btn_13:
                 break;

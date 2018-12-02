@@ -8,13 +8,13 @@ import android.content.Intent;
 
 import com.mask.mask.BluTools.ClsUtils;
 import com.mask.mask.Event.BluStateEvent;
-import com.mask.mask.LogUtil;
+import com.mask.mask.Util.LogUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
 
 /**
- *
+ *监控本地蓝牙状态
  */
 public class BluBroadReceiver extends BroadcastReceiver {
     public String TAG = "BluBroadReceiver";
