@@ -1,4 +1,4 @@
-package com.mask.mask.Activity;
+package com.mask.mask.APP;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
@@ -13,7 +13,6 @@ import android.view.KeyEvent;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.mask.mask.BluTools.BlueTools;
-import com.mask.mask.BroadReceiver.BluBroadReceiver;
 import com.mask.mask.R;
 import com.mask.mask.ViewAdapter.SectionsPagerAdapter;
 import com.mask.mask.Fragment.MeFragment;
@@ -48,6 +47,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     }
 
 
+    /**
+     * 注册蓝牙广播接收器
+     */
     public void registerBluReceiver(){
         mBluBroadReceiver = new BluBroadReceiver();
         IntentFilter intentFilter = new IntentFilter();
@@ -55,6 +57,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         registerReceiver(mBluBroadReceiver,intentFilter);
     }
 
+    /**
+     * 注册蓝牙广播接收器
+     */
     public void unRegisterBluReceiver(){
         if (mBluBroadReceiver!=null){
             unregisterReceiver(mBluBroadReceiver);

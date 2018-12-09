@@ -20,8 +20,10 @@ import com.mask.mask.BluTools.ConnectionThread;
 import com.mask.mask.BluTools.ConnectionManagementThread;
 import com.mask.mask.BluTools.BlueTools;
 import com.mask.mask.Event.BluStateEvent;
+import com.mask.mask.Event.ReceiveData;
 import com.mask.mask.Util.Cmd;
 import com.mask.mask.R;
+import com.mask.mask.Util.LogUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -31,6 +33,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ModeFragment extends BaseFragment implements View.OnClickListener {
+
+    public final static String TAG = ModeFragment.class.getSimpleName();
 
     public Button mBtnMode1,mBtnMode2,mBtnMode3,mBtnMode4,mBtnMode5,mBtnMode6,mBtnMode7,mBtnMode8;
     public Button mBtnMode9,mBtnMode10,mBtnMode11,mBtnMode12,mBtnMode13,mBtnMode14,mBtnMode15,mBtnMode16;
@@ -108,12 +112,14 @@ public class ModeFragment extends BaseFragment implements View.OnClickListener {
         mConnectionManagementThread.write(data);
     }
 
+
+
     @Override
     public void onClick(View v) {
 
         switch (v.getId()){
             case R.id.mode_btn_1:
-                write(Cmd.$Write);
+                write(Cmd.$Write+Cmd.comma+"04"+Cmd.comma+"01");
                 break;
             case R.id.mode_btn_2:
                 write("$Write");
@@ -159,6 +165,16 @@ public class ModeFragment extends BaseFragment implements View.OnClickListener {
         }
     }
 
+
+    /**
+     * 处理发送过来的数据
+     * @param data
+     */
+    public void onBluReceiveData(ReceiveData data)
+    {
+        LogUtil.e(TAG, "onBluReceiveData: " + data );
+    }
+
     /**
      * 随时监听蓝牙的状态
      * @param event
@@ -181,13 +197,16 @@ public class ModeFragment extends BaseFragment implements View.OnClickListener {
     }
 
     /**
-     *
+     *获得蓝牙连接管理线程
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getConnectionManagementThread(ConnectionManagementThread connectionManagementThread){
         mConnectionManagementThread = connectionManagementThread;
     }
 
+    /**
+     * 选择需要连接的蓝牙设备
+     */
     public AlertDialog mAlertDialog;
     public void showBondedBluListView(){
         final List<BluetoothDevice> devices = mBlueTools.getBondedDevices();

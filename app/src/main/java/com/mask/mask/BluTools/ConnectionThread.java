@@ -27,7 +27,7 @@ public class ConnectionThread extends Thread {
         BluetoothSocket tmp = null;
         mmDevice = device;
         try {
-            tmp = device.createRfcommSocketToServiceRecord(UUID.fromString(MY_UUID));
+            tmp = mmDevice.createRfcommSocketToServiceRecord(UUID.fromString(MY_UUID));
         } catch (IOException e) { }
         mmSocket = tmp;
     }

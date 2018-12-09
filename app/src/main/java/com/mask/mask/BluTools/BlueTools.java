@@ -37,12 +37,13 @@ public class BlueTools {
     /**
      * 打开蓝牙
      */
-    public void enableBlu(){
+    public boolean enableBlu(){
         if (!mBluetoothAdapter.isEnabled()){
             mBluetoothAdapter.enable();
         } else {
             EventBus.getDefault().post(new BluStateEvent("蓝牙已打开",BluetoothAdapter.STATE_ON));
         }
+        return true;
     }
 
     /**
@@ -63,10 +64,12 @@ public class BlueTools {
     /**
      * 关闭蓝牙
      */
-    public void disableBlu(){
+    public boolean disableBlu(){
         if (mBluetoothAdapter!=null) {
             mBluetoothAdapter.disable();
+            return true;
         }
+        return false;
     }
 
     /**

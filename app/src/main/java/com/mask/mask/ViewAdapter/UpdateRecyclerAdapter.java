@@ -10,20 +10,23 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
-import com.mask.mask.Bean.MainUpdateFragmentRecyclerItemBean;
+import com.mask.mask.Bean.UpdateItemBean;
 import com.mask.mask.R;
 
 import java.util.ArrayList;
 
 
-public class MainUpdateFragmentRecyclerAdapter extends RecyclerView.Adapter {
+/**
+ * 更新固件程序中的Recycler的适配器
+ */
+public class UpdateRecyclerAdapter extends RecyclerView.Adapter {
 
     public Context mContext;
 
-    ArrayList<MainUpdateFragmentRecyclerItemBean> mMainUpdateFragmentRecyclerItemBeans;
+    ArrayList<UpdateItemBean> mUpdateItemBeans;
 
-    public MainUpdateFragmentRecyclerAdapter(ArrayList<MainUpdateFragmentRecyclerItemBean> mainUpdateFragmentRecyclerItemBeans,Context context){
-        mMainUpdateFragmentRecyclerItemBeans = mainUpdateFragmentRecyclerItemBeans;
+    public UpdateRecyclerAdapter(ArrayList<UpdateItemBean> updateItemBeans, Context context){
+        mUpdateItemBeans = updateItemBeans;
         mContext =context;
     }
 
@@ -50,18 +53,18 @@ public class MainUpdateFragmentRecyclerAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        MainUpdateFragmentRecyclerItemBean mainUpdateFragmentRecyclerItemBean = mMainUpdateFragmentRecyclerItemBeans.get(i);
+        UpdateItemBean updateItemBean = mUpdateItemBeans.get(i);
         MyViewHolder myViewHolder = (MyViewHolder)viewHolder;
-        myViewHolder.mTvTitle.setText(mainUpdateFragmentRecyclerItemBean.getTitle());
+        myViewHolder.mTvTitle.setText(updateItemBean.getTitle());
         myViewHolder.mTvTitle.setTextColor(mContext.getResources().getColor(R.color.colorMainUpdateFragmentBtnUpdate));
-        myViewHolder.mBtnUpdate.setText(mainUpdateFragmentRecyclerItemBean.getBtnText());
+        myViewHolder.mBtnUpdate.setText(updateItemBean.getBtnText());
         myViewHolder.mBtnUpdate.setBackground(mContext.getResources().getDrawable(R.drawable.main_update_fragment_btn_update));
-        myViewHolder.mTvContent.setText(mainUpdateFragmentRecyclerItemBean.getContent());
+        myViewHolder.mTvContent.setText(updateItemBean.getContent());
         myViewHolder.mTvContent.setTextColor(mContext.getResources().getColor(R.color.colorMainUpdateFragmentBtnUpdate));
     }
 
     @Override
     public int getItemCount() {
-        return mMainUpdateFragmentRecyclerItemBeans.size();
+        return mUpdateItemBeans.size();
     }
 }

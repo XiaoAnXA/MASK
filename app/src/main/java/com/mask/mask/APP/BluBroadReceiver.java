@@ -1,4 +1,4 @@
-package com.mask.mask.BroadReceiver;
+package com.mask.mask.APP;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -44,24 +44,24 @@ public class BluBroadReceiver extends BroadcastReceiver {
                         break;
                 }
                 break;
-            case BluetoothAdapter.ACTION_CONNECTION_STATE_CHANGED:
-                break;
-            case BluetoothDevice.ACTION_FOUND://发现设备
-                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                String deviceName = device.getName();
-                if (deviceName.equals(FLAG_BLU)){
-                    if (device.getBondState() == BluetoothDevice.BOND_NONE){
-                        try {
-                            ClsUtils.createBond(device.getClass(), device);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-                break;
-            case BluetoothDevice.ACTION_PAIRING_REQUEST://配对请求
-                LogUtil.e("配对请求:","正在配对吧");
-                break;
+//            case BluetoothAdapter.ACTION_CONNECTION_STATE_CHANGED:
+//                break;
+//            case BluetoothDevice.ACTION_FOUND://发现设备
+//                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+//                String deviceName = device.getName();
+//                if (deviceName.equals(FLAG_BLU)){
+//                    if (device.getBondState() == BluetoothDevice.BOND_NONE){
+//                        try {
+//                            ClsUtils.createBond(device.getClass(), device);
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                }
+//                break;
+//            case BluetoothDevice.ACTION_PAIRING_REQUEST://配对请求
+//                LogUtil.e("配对请求:","正在配对吧");
+//                break;
         }
 
     }

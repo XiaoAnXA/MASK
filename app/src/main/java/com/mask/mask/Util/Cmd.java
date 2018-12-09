@@ -1,7 +1,9 @@
 package com.mask.mask.Util;
 
 
-
+/**
+ * 发送的命令
+ */
 public interface Cmd {
     String $Write ="245772697465";
     String $Read = "2452656164";

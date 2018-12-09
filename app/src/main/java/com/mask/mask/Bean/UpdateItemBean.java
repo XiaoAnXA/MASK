@@ -1,6 +1,6 @@
 package com.mask.mask.Bean;
 
-public class MainUpdateFragmentRecyclerItemBean {
+public class UpdateItemBean {
 
     private String title;//更新日期
     private String content;//更新的内容
@@ -39,7 +39,7 @@ public class MainUpdateFragmentRecyclerItemBean {
         this.viewColor = viewColor;
     }
 
-    public MainUpdateFragmentRecyclerItemBean(String title, String content, String btnText, int viewColor) {
+    public UpdateItemBean(String title, String content, String btnText, int viewColor) {
         this.title = title;
         this.content = content;
         this.btnText = btnText;
