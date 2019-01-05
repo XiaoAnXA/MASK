@@ -18,13 +18,13 @@ import java.util.Arrays;
 /**
  * 接收和发送数据操作类
  */
-public class ConnectionManagementThread extends Thread {
+public class ServiceThread extends Thread {
 
     private final BluetoothSocket mmSocket;
     private final InputStream mmInStream;
     private final OutputStream mmOutStream;
 
-    public ConnectionManagementThread(BluetoothSocket socket) {
+    public ServiceThread(BluetoothSocket socket) {
         mmSocket = socket;
         InputStream tmpIn = null;
         OutputStream tmpOut = null;

@@ -19,9 +19,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         Fragment fragment = fragmentList.get(position);
-        Bundle bundle = new Bundle();
-        bundle.putString("id","" + position);
-        fragment.setArguments(bundle);
+//        Bundle bundle = new Bundle();
+//        bundle.putString("id","" + position);
+//        fragment.setArguments(bundle);
         return fragment;
     }
 

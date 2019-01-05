@@ -4,7 +4,6 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 
-import com.mask.mask.BluTools.ConnectionManagementThread;
 import com.mask.mask.Event.BluStateEvent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -21,7 +20,7 @@ public class ConnectionThread extends Thread {
 
     private final BluetoothSocket mmSocket;
     private final BluetoothDevice mmDevice;
-    public ConnectionManagementThread mConnectionManagementThread;
+    public ServiceThread mServiceThread;
 
     public ConnectionThread(BluetoothDevice device) {
         BluetoothSocket tmp = null;
@@ -43,9 +42,9 @@ public class ConnectionThread extends Thread {
             } catch (IOException closeException) { }
             return;
         }
-        mConnectionManagementThread = new ConnectionManagementThread(mmSocket);
-        mConnectionManagementThread.start();
-        EventBus.getDefault().post(mConnectionManagementThread);
+        mServiceThread = new ServiceThread(mmSocket);
+        mServiceThread.start();
+        EventBus.getDefault().post(mServiceThread);
     }
 
     public void cancel() {

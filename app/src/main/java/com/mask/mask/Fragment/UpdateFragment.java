@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mask.mask.BluTools.BluManage;
 import com.mask.mask.ViewAdapter.UpdateRecyclerAdapter;
 import com.mask.mask.Bean.UpdateItemBean;
 import com.mask.mask.R;
@@ -21,10 +22,25 @@ public class UpdateFragment extends BaseFragment {
 
 
     public UpdateRecyclerAdapter mUpdateRecyclerAdapter;
+    private BluManage mBluManage;
+
+    public UpdateFragment(){
+
+    }
+
+    public static UpdateFragment newInstance(BluManage bluManage) {
+        UpdateFragment newFragment = new UpdateFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("BluManage",bluManage);
+        newFragment.setArguments(bundle);
+        return newFragment;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle arguments = this.getArguments();
+        mBluManage = (BluManage) arguments.getSerializable("BluManage");
         mUpdateRecyclerAdapter = new UpdateRecyclerAdapter(getArrayList(),getContext());
     }
 

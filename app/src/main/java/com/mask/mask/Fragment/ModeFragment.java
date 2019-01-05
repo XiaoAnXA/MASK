@@ -1,36 +1,25 @@
 package com.mask.mask.Fragment;
 
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.mask.mask.BluTools.ConnectionThread;
-import com.mask.mask.BluTools.ConnectionManagementThread;
-import com.mask.mask.BluTools.BlueTools;
+import com.mask.mask.BluTools.BluManage;
 import com.mask.mask.Event.BluStateEvent;
-import com.mask.mask.Event.ReceiveData;
 import com.mask.mask.Util.Cmd;
 import com.mask.mask.R;
-import com.mask.mask.Util.LogUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class ModeFragment extends BaseFragment implements View.OnClickListener {
 
@@ -40,15 +29,25 @@ public class ModeFragment extends BaseFragment implements View.OnClickListener {
     public Button mBtnMode9,mBtnMode10,mBtnMode11,mBtnMode12,mBtnMode13,mBtnMode14,mBtnMode15,mBtnMode16;
     public TextView mTvBluState;
     public ImageView mIvLogo;
-    public BlueTools mBlueTools;
-    public ConnectionThread mConnectionThread;
-    public ConnectionManagementThread mConnectionManagementThread;
+    public BluManage mBluManage;
+
+    public ModeFragment(){
+
+    }
+    public static ModeFragment newInstance(BluManage bluManage) {
+        ModeFragment newFragment = new ModeFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("BluManage",bluManage);
+        newFragment.setArguments(bundle);
+        return newFragment;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle arguments = this.getArguments();
+        mBluManage = (BluManage) arguments.getSerializable("BluManage");
         EventBus.getDefault().register(this);
-        mBlueTools = BlueTools.getBlueTools(getContext());
     }
 
     @Nullable
@@ -56,7 +55,6 @@ public class ModeFragment extends BaseFragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_mode_fragment,null);
         initView(view);
-        mBlueTools.enableBlu();
         return view;
     }
 
@@ -84,7 +82,7 @@ public class ModeFragment extends BaseFragment implements View.OnClickListener {
         mIvLogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showBondedBluListView();
+                mBluManage.showBondedBluListView();
             }
         });
 
@@ -108,11 +106,9 @@ public class ModeFragment extends BaseFragment implements View.OnClickListener {
     }
 
     public void write(String data){
-        if (mConnectionManagementThread == null){return;}
-        mConnectionManagementThread.write(data);
+        if (mBluManage== null){return;}
+        mBluManage.writeData(data);
     }
-
-
 
     @Override
     public void onClick(View v) {
@@ -165,16 +161,6 @@ public class ModeFragment extends BaseFragment implements View.OnClickListener {
         }
     }
 
-
-    /**
-     * 处理发送过来的数据
-     * @param data
-     */
-    public void onBluReceiveData(ReceiveData data)
-    {
-        LogUtil.e(TAG, "onBluReceiveData: " + data );
-    }
-
     /**
      * 随时监听蓝牙的状态
      * @param event
@@ -186,49 +172,13 @@ public class ModeFragment extends BaseFragment implements View.OnClickListener {
             case BluetoothAdapter.STATE_OFF:
                 break;
             case BluetoothAdapter.STATE_ON:
-                showBondedBluListView();
+                mBluManage.showBondedBluListView();
                 break;
             case BluetoothAdapter.STATE_TURNING_OFF:
                 break;
             case BluetoothAdapter.STATE_TURNING_ON:
                 break;
-
         }
-    }
-
-    /**
-     *获得蓝牙连接管理线程
-     */
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void getConnectionManagementThread(ConnectionManagementThread connectionManagementThread){
-        mConnectionManagementThread = connectionManagementThread;
-    }
-
-    /**
-     * 选择需要连接的蓝牙设备
-     */
-    public AlertDialog mAlertDialog;
-    public void showBondedBluListView(){
-        final List<BluetoothDevice> devices = mBlueTools.getBondedDevices();
-        List<String> devicesName = new ArrayList<>();
-        for (BluetoothDevice device : devices){
-            devicesName.add(device.getName());
-        }
-        ListView listView = new ListView(getActivity());
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,devicesName);
-        listView.setAdapter(arrayAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mAlertDialog.dismiss();
-                mConnectionThread = new ConnectionThread(devices.get(position));
-                mConnectionThread.start();
-                EventBus.getDefault().post(new BluStateEvent("正在连接",BluetoothAdapter.STATE_CONNECTING));
-            }
-        });
-        mAlertDialog = new AlertDialog.Builder(getActivity())
-                .setTitle("请选择MASK设配")
-                .setView(listView).show();
     }
 
     @Override

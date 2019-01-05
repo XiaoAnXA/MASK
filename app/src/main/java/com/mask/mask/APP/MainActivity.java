@@ -1,6 +1,7 @@
 package com.mask.mask.APP;
 
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.content.DialogInterface;
 import android.content.IntentFilter;
 import android.support.v4.app.Fragment;
@@ -9,25 +10,38 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.mask.mask.BluTools.BluManage;
 import com.mask.mask.BluTools.BlueTools;
+import com.mask.mask.BluTools.ServiceThread;
+import com.mask.mask.BluTools.ConnectionThread;
+import com.mask.mask.Event.BluStateEvent;
 import com.mask.mask.R;
 import com.mask.mask.ViewAdapter.SectionsPagerAdapter;
 import com.mask.mask.Fragment.MeFragment;
 import com.mask.mask.Fragment.ModeFragment;
 import com.mask.mask.Fragment.UpdateFragment;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 主界面
  * 三个碎片，一个模式，一个更新，一个我的
- *
+ *管理蓝牙连接
  *
  */
-public class MainActivity extends AppCompatActivity implements BottomNavigationBar.OnTabSelectedListener, ViewPager.OnPageChangeListener {
+public class MainActivity extends AppCompatActivity implements BottomNavigationBar.OnTabSelectedListener, ViewPager.OnPageChangeListener,BluManage {
 
     public final static String TAG = MainActivity.class.getSimpleName();
 
@@ -36,14 +50,20 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
 
     public BlueTools mBlueTools;
     public BluBroadReceiver mBluBroadReceiver;
+    public ConnectionThread mConnectionThread;
+
+    public AlertDialog mAlertDialog;
+    public ServiceThread mServiceThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        EventBus.getDefault().register(this);
         registerBluReceiver();
         mBlueTools = BlueTools.getBlueTools(this);
         initView();
+        mBlueTools.enableBlu();
     }
 
 
@@ -83,8 +103,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
 
     public ArrayList<Fragment> getFragments() {
         ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
-        fragmentArrayList.add(new ModeFragment());
-        fragmentArrayList.add(new UpdateFragment());
+        fragmentArrayList.add(ModeFragment.newInstance(this));
+        fragmentArrayList.add(UpdateFragment.newInstance(this));
         fragmentArrayList.add(new MeFragment());
         return fragmentArrayList;
     }
@@ -135,6 +155,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
         unRegisterBluReceiver();
         mBlueTools.disableBlu();
     }
@@ -159,4 +180,58 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         }
         return true;
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void setConnectionThread(ServiceThread serviceThread){
+        mServiceThread = serviceThread;
+    }
+
+    @Override
+    public boolean openBlu() {
+        return mBlueTools.enableBlu();
+    }
+
+    @Override
+    public boolean closeBlu() {
+        return mBlueTools.disableBlu();
+    }
+
+    @Override
+    public boolean writeData(String data) {
+        if(mServiceThread != null){
+            mServiceThread.write(data);
+        }
+        return false;
+    }
+
+
+    @Override
+    public ServiceThread connectionThread() {
+        return mServiceThread;
+    }
+
+    @Override
+    public void showBondedBluListView() {
+        final List<BluetoothDevice> devices = mBlueTools.getBondedDevices();
+        List<String> devicesName = new ArrayList<>();
+        for (BluetoothDevice device : devices){
+            devicesName.add(device.getName());
+        }
+        ListView listView = new ListView(this);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,devicesName);
+        listView.setAdapter(arrayAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mAlertDialog.dismiss();
+                mConnectionThread = new ConnectionThread(devices.get(position));
+                mConnectionThread.start();
+                EventBus.getDefault().post(new BluStateEvent("正在连接",BluetoothAdapter.STATE_CONNECTING));
+            }
+        });
+        mAlertDialog = new AlertDialog.Builder(this)
+                .setTitle("请选择MASK设配")
+                .setView(listView).show();
+    }
+
 }
