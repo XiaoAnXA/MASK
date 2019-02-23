@@ -20,7 +20,11 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-
+/**
+ * 模式控制页
+ *
+ *
+ */
 public class ModeFragment extends BaseFragment implements View.OnClickListener {
 
     public final static String TAG = ModeFragment.class.getSimpleName();
@@ -34,6 +38,7 @@ public class ModeFragment extends BaseFragment implements View.OnClickListener {
     public ModeFragment(){
 
     }
+
     public static ModeFragment newInstance(BluManage bluManage) {
         ModeFragment newFragment = new ModeFragment();
         Bundle bundle = new Bundle();
@@ -59,7 +64,6 @@ public class ModeFragment extends BaseFragment implements View.OnClickListener {
     }
 
     private void initView(View view) {
-
         mBtnMode1 = view.findViewById(R.id.mode_btn_1);
         mBtnMode2= view.findViewById(R.id.mode_btn_2);
         mBtnMode3 = view.findViewById(R.id.mode_btn_3);
@@ -105,6 +109,7 @@ public class ModeFragment extends BaseFragment implements View.OnClickListener {
 
     }
 
+    //写入数据
     public void write(String data){
         if (mBluManage== null){return;}
         mBluManage.writeData(data);

@@ -51,237 +51,179 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp">
 
-        <RelativeLayout
+        <TableRow
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_weight="1"
             android:gravity="center">
-
             <Button
+                android:layout_margin="10dp"
                 android:id="@+id/mode_btn_1"
                 style="@style/main_mode_fragment_button"
                 android:background="@drawable/main_mode_fragment_button_down_selector"
                 android:text="1" />
-        </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:gravity="center">
 
             <Button
+                android:layout_margin="10dp"
                 android:id="@+id/mode_btn_2"
                 style="@style/main_mode_fragment_button"
                 android:background="@drawable/main_mode_fragment_button_down_selector"
                 android:text="2" />
-        </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:gravity="center">
 
             <Button
+                android:layout_margin="10dp"
                 android:id="@+id/mode_btn_3"
                 style="@style/main_mode_fragment_button"
                 android:background="@drawable/main_mode_fragment_button_down_selector"
                 android:text="3" />
-        </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:gravity="center">
 
             <Button
+                android:layout_margin="10dp"
                 android:id="@+id/mode_btn_4"
                 style="@style/main_mode_fragment_button"
                 android:background="@drawable/main_mode_fragment_button_down_selector"
                 android:text="4" />
-        </RelativeLayout>
-    </LinearLayout>
+        </TableRow>
+    </TableLayout>
 
-    <LinearLayout
+    <TableLayout
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <RelativeLayout
+        <TableRow
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_weight="1"
             android:gravity="center">
 
             <Button
+                android:layout_margin="10dp"
                 android:id="@+id/mode_btn_5"
                 style="@style/main_mode_fragment_button"
                 android:background="@drawable/main_mode_fragment_button_down_selector"
                 android:text="5" />
-        </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:gravity="center">
 
             <Button
+                android:layout_margin="10dp"
                 android:id="@+id/mode_btn_6"
                 style="@style/main_mode_fragment_button"
                 android:background="@drawable/main_mode_fragment_button_down_selector"
                 android:text="6" />
-        </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:gravity="center">
 
             <Button
+                android:layout_margin="10dp"
                 android:id="@+id/mode_btn_7"
                 style="@style/main_mode_fragment_button"
                 android:background="@drawable/main_mode_fragment_button_down_selector"
                 android:text="7" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:gravity="center">
-
             <Button
+                android:layout_margin="10dp"
                 android:id="@+id/mode_btn_8"
                 style="@style/main_mode_fragment_button"
                 android:background="@drawable/main_mode_fragment_button_down_selector"
                 android:text="8" />
-        </RelativeLayout>
-    </LinearLayout>
+
+        </TableRow>
+
+    </TableLayout>
 
 
-    <LinearLayout
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp">
 
-        <RelativeLayout
+        <TableRow
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_weight="1"
             android:gravity="center">
 
             <Button
+                android:layout_margin="10dp"
                 android:id="@+id/mode_btn_9"
                 style="@style/main_mode_fragment_button"
                 android:background="@drawable/main_mode_fragment_button_down_selector"
                 android:text="9" />
-        </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:gravity="center">
+
 
             <Button
+                android:layout_margin="10dp"
                 android:id="@+id/mode_btn_10"
                 style="@style/main_mode_fragment_button"
                 android:background="@drawable/main_mode_fragment_button_down_selector"
                 android:text="10" />
-        </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:gravity="center">
 
             <Button
+                android:layout_margin="10dp"
                 android:id="@+id/mode_btn_11"
                 style="@style/main_mode_fragment_button"
                 android:background="@drawable/main_mode_fragment_button_down_selector"
                 android:text="11" />
-        </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:gravity="center">
 
             <Button
+                android:layout_margin="10dp"
                 android:id="@+id/mode_btn_12"
                 style="@style/main_mode_fragment_button"
                 android:background="@drawable/main_mode_fragment_button_down_selector"
                 android:text="12" />
-        </RelativeLayout>
-    </LinearLayout>
+        </TableRow>
+    </TableLayout>
 
-    <LinearLayout
+    <TableLayout
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <RelativeLayout
+        <TableRow
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_weight="1"
             android:gravity="center">
 
             <Button
+                android:layout_margin="10dp"
                 android:id="@+id/mode_btn_13"
                 style="@style/main_mode_fragment_button"
                 android:background="@drawable/main_mode_fragment_button_down_selector"
                 android:text="13" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:gravity="center">
-
             <Button
+
+                android:layout_margin="10dp"
                 android:id="@+id/mode_btn_14"
                 style="@style/main_mode_fragment_button"
                 android:background="@drawable/main_mode_fragment_button_down_selector"
                 android:text="14" />
-        </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:gravity="center">
 
             <Button
+                android:layout_margin="10dp"
                 android:id="@+id/mode_btn_15"
                 style="@style/main_mode_fragment_button"
                 android:background="@drawable/main_mode_fragment_button_down_selector"
                 android:text="15" />
-        </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:gravity="center">
 
             <Button
+                android:layout_margin="10dp"
                 android:id="@+id/mode_btn_16"
                 style="@style/main_mode_fragment_button"
                 android:background="@drawable/main_mode_fragment_button_down_selector"
                 android:text="16" />
-        </RelativeLayout>
-    </LinearLayout>
-
+        </TableRow>
+    </TableLayout>
 </LinearLayout>

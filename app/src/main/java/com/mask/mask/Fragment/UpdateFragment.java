@@ -16,6 +16,9 @@ import com.mask.mask.R;
 
 import java.util.ArrayList;
 
+/**
+ * 更新硬件页面
+ */
 public class UpdateFragment extends BaseFragment {
 
     public RecyclerView mRecyclerView;

@@ -25,10 +25,11 @@
             android:id="@+id/main_update_recycler_item_btn_update"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:layout_marginRight="10dp"
+            android:layout_margin="10dp"
             android:layout_weight="1"
             android:textColor="#ffffff"
-            android:layout_marginEnd="10dp" />
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp" />
     </LinearLayout>
 
     <TextView

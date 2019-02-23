@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+/**
+ * 三个主碎片更新页面
+ */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
     List<Fragment> fragmentList;
     FragmentManager mFragmentManager;
@@ -19,9 +22,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         Fragment fragment = fragmentList.get(position);
-//        Bundle bundle = new Bundle();
-//        bundle.putString("id","" + position);
-//        fragment.setArguments(bundle);
         return fragment;
     }
 

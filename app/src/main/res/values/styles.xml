@@ -18,8 +18,8 @@
         <item name="android:textColor">@color/colorMainText</item>
         <item name="android:textSize">30sp</item>
         <item name="android:gravity">center</item>
-        <item name="android:layout_width">50dp</item>
-        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">60dp</item>
     </style>
 
 </resources>
